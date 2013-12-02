@@ -34,12 +34,16 @@
     _pendulumStringTiltedAngle = pendulumStringTiltedAngle;
     
     _pendulumsPool = [NSMutableArray arrayWithCapacity:_maxNumberOfPendulums];
+    
+    
     for ( int i = 0; i < self.maxNumberOfPendulums; i++ ) {
         _pendulumsPool[i] = [[Pendulum alloc] initWithAngle:0.0 length:self.pendulumLength bobRadius: self.pendulumBobRadius stringTiltedAngle: self.pendulumStringTiltedAngle name:[NSString stringWithFormat:@"pendulum-%d", i]];
     }
-    for ( Pendulum *pendulum in _pendulumsPool ) {
-        [pendulum buildPendulum];
-    }
+    
+    
+    [_pendulumsPool enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [obj buildPendulum];
+    }];
     _handleNode = [SCNNode node];
     _frontHorizontalPoleNode = [SCNNode node];
     _backHorizontalPoleNode = [SCNNode node];
@@ -66,9 +70,12 @@
 
 - (void)buildCradle {
     _pendulums = [[NSMutableArray alloc] initWithCapacity:self.numberOfPendulums];
+    
+    
     for ( int i = 0; i < self.numberOfPendulums; i++ ) {
         _pendulums[i] = self.pendulumsPool[i];
     }
+    
     [self addPendulumsToCradle];
     [self buildFrame];
     [self buildBase];
@@ -82,10 +89,18 @@
 }
 
 - (void)addPendulumsToCradle {
+    
+    [self.pendulums enumerateObjectsUsingBlock:^(Pendulum *pendulum, NSUInteger idx, BOOL *stop) {
+        pendulum.handleNode.position = SCNVector3Make( self.pendulumBobRadius + self.pendulumBobRadius * 2.0 * ( [self.pendulums indexOfObject:pendulum] - self.numberOfPendulums * 0.5 ) , 0.0, 0.0 );
+        [self.handleNode addChildNode:pendulum.handleNode];
+    }];
+    
+    /*
     for ( Pendulum *pendulum in self.pendulums ) {
         pendulum.handleNode.position = SCNVector3Make( self.pendulumBobRadius + self.pendulumBobRadius * 2.0 * ( [self.pendulums indexOfObject:pendulum] - self.numberOfPendulums * 0.5 ) , 0.0, 0.0 );
         [self.handleNode addChildNode:pendulum.handleNode];
     }
+     */
 }
 
 - (void)buildFrame {
@@ -145,13 +160,8 @@
 }
 
 - (NSUInteger)indexOfPendulumWithPendulumName: (NSString *)pendulumName {
-    NSUInteger pendulumIndex = -1;
-    for ( Pendulum *pendulum in self.pendulums ) {
-        if ( pendulum.name == pendulumName ) {
-            pendulumIndex = [self.pendulums indexOfObject:pendulum];
-            break;
-        }
-    }
+    NSString *pendulumIndexString = [[pendulumName componentsSeparatedByString:@"-"] lastObject];
+    NSUInteger pendulumIndex = [pendulumIndexString integerValue];
     return pendulumIndex;
 }
 

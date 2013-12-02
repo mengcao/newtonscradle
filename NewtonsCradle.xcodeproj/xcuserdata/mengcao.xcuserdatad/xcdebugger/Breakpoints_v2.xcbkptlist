@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NewtonsCradle/Cradle.m"
-            timestampString = "407479286.16618"
+            timestampString = "407704461.897938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "-initWithMaxNumberOfPendulums:numberOfPendulums:pendulumBobRadius:pendulumLength:pendulumStringTiltedAngle:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NewtonsCradle/Cradle.m"
-            timestampString = "407479149.295057"
+            timestampString = "407704461.897938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "-buildFrame"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,12 +42,74 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NewtonsCradle/Cradle.m"
-            timestampString = "407479152.53568"
+            timestampString = "407704461.897938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "-buildFrame"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewtonsCradle/Cradle.m"
+            timestampString = "407704461.897938"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-buildCradle"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[Cradle buildCradle]"
+                  moduleName = "NewtonsCradle"
+                  urlString = "file:///Users/mengcao/Developer/NewtonsCradle/NewtonsCradle/Cradle.m"
+                  timestampString = "407696959.767579"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[Cradle buildCradle]"
+                  moduleName = "NewtonsCradle"
+                  urlString = "file:///Users/mengcao/Developer/NewtonsCradle/NewtonsCradle/Cradle.m"
+                  timestampString = "407696959.769141"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "303">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewtonsCradle/Cradle.m"
+            timestampString = "407704461.897938"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "-indexOfPendulumWithPendulumName:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
