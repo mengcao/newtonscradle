@@ -89,7 +89,6 @@
     [self.cradle buildCradle];
     self.cradle.handleNode.position = position;
     
-    NSLog(@"%lu\n" , [[self.cradle.handleNode childNodes] count]);
     [self.scene.rootNode addChildNode:self.cradle.handleNode];
     
 }
