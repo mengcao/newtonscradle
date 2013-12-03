@@ -16,6 +16,7 @@
 @property ( nonatomic ) NSPoint dragStartLocation;
 @property ( nonatomic ) float dragStartAngle;
 @property ( nonatomic ) NSUInteger draggedPendulumIndex;
+@property ( nonatomic ) CATransform3D oldCameraTransform;
 
 
 @end
@@ -66,6 +67,7 @@
     cameraNode.camera.xFov = 70.0;
     cameraNode.camera.yFov = 70.0;
     cameraNode.name = @"camera";
+    _oldCameraTransform = cameraNode.transform;
     [self.scene.rootNode addChildNode:cameraNode];
 }
 
@@ -121,6 +123,12 @@
 - (void)mouseDragged:(NSEvent *)theEvent {
     if ( !self.draggingPendulumBob ) {
         [super mouseDragged:theEvent];
+        
+        // never let user move camera under the floor
+        if ( self.pointOfView.position.y < 1.0 ) {
+            self.pointOfView.transform = self.oldCameraTransform;
+        }
+        self.oldCameraTransform = self.pointOfView.transform;
     } else {
         NSPoint draggingLocation = [self convertPoint:[theEvent locationInWindow] fromView:nil];
         float draggedAngle = ( draggingLocation.x - self.dragStartLocation.x ) * 0.01;

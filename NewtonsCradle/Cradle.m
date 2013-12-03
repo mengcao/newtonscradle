@@ -290,5 +290,6 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"cradleAnimationDidStopNotification" object:nil];
+    [self stopAnimation];
 }
 @end

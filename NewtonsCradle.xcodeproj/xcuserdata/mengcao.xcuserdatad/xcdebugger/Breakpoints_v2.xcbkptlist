@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NewtonsCradle/NewtonsCradleView.m"
-            timestampString = "407729326.456785"
+            timestampString = "407738748.73949"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "-setupScene"
             landmarkType = "5">
          </BreakpointContent>

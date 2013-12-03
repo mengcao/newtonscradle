@@ -653,12 +653,12 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="800" height="600"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
-            <view key="contentView" wantsLayer="YES" id="372">
+            <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <sceneView loops="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0GU-ug-Cgb" customClass="NewtonsCradleView">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                    <sceneView ambiguous="YES" misplaced="YES" loops="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0GU-ug-Cgb" customClass="NewtonsCradleView">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="550"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </sceneView>
@@ -698,12 +698,14 @@
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="0fh-BX-ms6" firstAttribute="top" secondItem="372" secondAttribute="top" id="7No-QC-eS1"/>
-                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="Gn8-Kb-gkO"/>
-                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="372" secondAttribute="top" id="VHo-0L-jWa"/>
-                    <constraint firstAttribute="bottom" secondItem="0GU-ug-Cgb" secondAttribute="bottom" id="aaQ-te-MHq"/>
-                    <constraint firstItem="0fh-BX-ms6" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="kdL-zV-aNK"/>
-                    <constraint firstAttribute="trailing" secondItem="0GU-ug-Cgb" secondAttribute="trailing" id="ut7-b2-lev"/>
+                    <constraint firstAttribute="bottom" secondItem="0GU-ug-Cgb" secondAttribute="bottom" id="5Wy-rN-v58"/>
+                    <constraint firstItem="0fh-BX-ms6" firstAttribute="top" secondItem="372" secondAttribute="top" id="XfG-iC-OQm"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="dYe-Ct-sBe"/>
+                    <constraint firstItem="0fh-BX-ms6" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="kVX-6O-sex"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="0fh-BX-ms6" secondAttribute="bottom" id="l9J-gS-OYt"/>
+                    <constraint firstAttribute="trailing" secondItem="0fh-BX-ms6" secondAttribute="trailing" id="wqb-vv-QdC"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="0fh-BX-ms6" secondAttribute="bottom" id="xdz-7Q-MgK"/>
+                    <constraint firstAttribute="trailing" secondItem="0GU-ug-Cgb" secondAttribute="trailing" id="zEe-WG-WpU"/>
                 </constraints>
             </view>
         </window>
