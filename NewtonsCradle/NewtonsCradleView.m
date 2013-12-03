@@ -12,7 +12,7 @@
 @interface NewtonsCradleView()
 
 @property ( nonatomic ) Cradle *cradle;
-@property ( nonatomic ) BOOL draggingPendulumBob;
+@property ( nonatomic ) BOOL isDraggingPendulumBob;
 @property ( nonatomic ) NSPoint dragStartLocation;
 @property ( nonatomic ) float dragStartAngle;
 @property ( nonatomic ) NSUInteger draggedPendulumIndex;
@@ -27,7 +27,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _draggingPendulumBob = NO;
+        _isDraggingPendulumBob = NO;
     }
     return self;
 }
@@ -106,29 +106,28 @@
 
 - (void)mouseDown:(NSEvent *)theEvent {
     NSPoint mouseLocation = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSArray *hits = [self hitTest:mouseLocation options:nil];
     
-    if ([hits count] > 0 && !self.cradle.isAnimating) {
-        SCNHitTestResult *hit = hits[0];
-        if ( [hit.node.geometry isKindOfClass:[SCNSphere class]] ) {
-            self.draggingPendulumBob = YES;
-            self.dragStartLocation = mouseLocation;
-            self.dragStartAngle = hit.node.parentNode.rotation.w;
-            self.draggedPendulumIndex = [self.cradle indexOfPendulumWithPendulumName:hit.node.parentNode.name];
+    if ( !self.cradle.isAnimating ) {
+        NSArray *hits = [self hitTest:mouseLocation options:nil];
+        if ( [hits count] > 0 ) {
+            SCNHitTestResult *hit = hits[0];
+            if ( [hit.node.geometry isKindOfClass:[SCNSphere class]] ) {
+                self.isDraggingPendulumBob = YES;
+                self.dragStartLocation = mouseLocation;
+                self.dragStartAngle = hit.node.parentNode.rotation.w;
+                self.draggedPendulumIndex = [self.cradle indexOfPendulumWithPendulumName:hit.node.parentNode.name];
+            }
         }
     }
+    
     [super mouseDown:theEvent];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {
-    if ( !self.draggingPendulumBob ) {
+    if ( !self.isDraggingPendulumBob ) {
         [super mouseDragged:theEvent];
         
-        // never let user move camera under the floor
-        if ( self.pointOfView.position.y < 1.0 ) {
-            self.pointOfView.transform = self.oldCameraTransform;
-        }
-        self.oldCameraTransform = self.pointOfView.transform;
+        [self forbidCameraGoingUnderFloor];
     } else {
         NSPoint draggingLocation = [self convertPoint:[theEvent locationInWindow] fromView:nil];
         float draggedAngle = ( draggingLocation.x - self.dragStartLocation.x ) * 0.01;
@@ -138,17 +137,34 @@
         if ( fabs(newAngle) > (M_PI/2.0-0.1) ) {
             newAngle = fabs(newAngle)/newAngle * (M_PI/2.0-0.1);
         }
+        // flip the sign of angle if camera is on the back of the cradle
+        newAngle = newAngle * fabs( self.pointOfView.position.z ) / ( self.pointOfView.position.z );
+        
         [self.cradle dragPendulumBobAtIndex: self.draggedPendulumIndex withAngle:newAngle];
     }
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
-    if ( self.draggingPendulumBob ) {
-        self.draggingPendulumBob = NO;
+    if ( self.isDraggingPendulumBob ) {
+        self.isDraggingPendulumBob = NO;
         [self.cradle animateWithDuration:20.0];
     }
     
     [super mouseUp:theEvent];
+    NSLog(@"%f, %f\n", self.pointOfView.camera.xFov, self.pointOfView.camera.yFov );
+    
+}
+
+- (void)scrollWheel:(NSEvent *)theEvent {
+    [super scrollWheel:theEvent];
+    [self forbidCameraGoingUnderFloor];
+}
+
+- (void)forbidCameraGoingUnderFloor {
+    if ( self.pointOfView.position.y < 5.0 ) {
+        self.pointOfView.transform = self.oldCameraTransform;
+    }
+    self.oldCameraTransform = self.pointOfView.transform;
 }
 
 

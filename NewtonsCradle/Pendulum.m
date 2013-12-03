@@ -55,7 +55,7 @@
     return ( self.angle == 0.0 && anotherPendulum.angle == 0.0 && ( self.angularVelocity - anotherPendulum.angularVelocity != 0.0 ) );
 //    float collisionFlag = ( self.angle - anotherPendulum.angle ) * ( self.angle + self.angularVelocity * dt - (anotherPendulum.angle + anotherPendulum.angularVelocity * dt ) );
 //    
-//    return collisionFlag < 0.0;
+//    return ( collisionFlag <= 0.0 && ( self.angularVelocity - anotherPendulum.angularVelocity != 0.0 ) );
     
 }
 

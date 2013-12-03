@@ -167,6 +167,9 @@
             if ([self.pendulums indexOfObject:pendulum] >= index ) {
                 pendulum.angle = angle;
                 pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, angle );
+            } else {
+                pendulum.angle = 0.0;
+                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
             }
         }
     } else {
@@ -174,6 +177,9 @@
             if ([self.pendulums indexOfObject:pendulum] <= index ) {
                 pendulum.angle = angle;
                 pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, angle );
+            } else {
+                pendulum.angle = 0.0;
+                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
             }
         }
     }
