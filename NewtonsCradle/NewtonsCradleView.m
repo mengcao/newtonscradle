@@ -120,6 +120,7 @@
         }
     }
     
+    
     [super mouseDown:theEvent];
 }
 
@@ -151,8 +152,6 @@
     }
     
     [super mouseUp:theEvent];
-    NSLog(@"%f, %f\n", self.pointOfView.camera.xFov, self.pointOfView.camera.yFov );
-    
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent {
