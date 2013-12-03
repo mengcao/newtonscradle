@@ -652,11 +652,16 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="800" height="600"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
-            <view key="contentView" id="372">
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <view key="contentView" wantsLayer="YES" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <sceneView loops="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0GU-ug-Cgb" customClass="NewtonsCradleView">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </sceneView>
                     <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fh-BX-ms6">
                         <rect key="frame" x="0.0" y="550" width="800" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -691,19 +696,14 @@
                             </button>
                         </subviews>
                     </customView>
-                    <sceneView ambiguous="YES" misplaced="YES" loops="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0GU-ug-Cgb" customClass="NewtonsCradleView">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="550"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </sceneView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="0Ec-qp-dPp"/>
-                    <constraint firstAttribute="bottom" secondItem="0GU-ug-Cgb" secondAttribute="bottom" id="Lcp-bf-req"/>
-                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="0fh-BX-ms6" secondAttribute="bottom" id="MnI-dW-vEf"/>
-                    <constraint firstItem="0fh-BX-ms6" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="2" id="PG5-qi-Vlt"/>
-                    <constraint firstAttribute="trailing" secondItem="0GU-ug-Cgb" secondAttribute="trailing" id="jkt-aS-Uce"/>
-                    <constraint firstItem="0fh-BX-ms6" firstAttribute="top" secondItem="372" secondAttribute="top" id="wRW-07-Nkb"/>
+                    <constraint firstItem="0fh-BX-ms6" firstAttribute="top" secondItem="372" secondAttribute="top" id="7No-QC-eS1"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="Gn8-Kb-gkO"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="372" secondAttribute="top" id="VHo-0L-jWa"/>
+                    <constraint firstAttribute="bottom" secondItem="0GU-ug-Cgb" secondAttribute="bottom" id="aaQ-te-MHq"/>
+                    <constraint firstItem="0fh-BX-ms6" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="kdL-zV-aNK"/>
+                    <constraint firstAttribute="trailing" secondItem="0GU-ug-Cgb" secondAttribute="trailing" id="ut7-b2-lev"/>
                 </constraints>
             </view>
         </window>
