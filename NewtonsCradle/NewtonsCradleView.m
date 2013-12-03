@@ -125,7 +125,7 @@
         NSPoint draggingLocation = [self convertPoint:[theEvent locationInWindow] fromView:nil];
         float draggedAngle = ( draggingLocation.x - self.dragStartLocation.x ) * 0.01;
         
-        // never let user drag the pendulum more than 180 degrees
+        // never let user drag the pendulum more than 90 degrees
         float newAngle = self.dragStartAngle + draggedAngle;
         if ( fabs(newAngle) > (M_PI/2.0-0.1) ) {
             newAngle = fabs(newAngle)/newAngle * (M_PI/2.0-0.1);

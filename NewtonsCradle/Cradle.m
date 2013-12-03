@@ -89,18 +89,14 @@
 }
 
 - (void)addPendulumsToCradle {
-    
-    [self.pendulums enumerateObjectsUsingBlock:^(Pendulum *pendulum, NSUInteger idx, BOOL *stop) {
+    [self.pendulums enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(Pendulum *pendulum, NSUInteger idx, BOOL *stop) {
         pendulum.handleNode.position = SCNVector3Make( self.pendulumBobRadius + self.pendulumBobRadius * 2.0 * ( [self.pendulums indexOfObject:pendulum] - self.numberOfPendulums * 0.5 ) , 0.0, 0.0 );
-        [self.handleNode addChildNode:pendulum.handleNode];
     }];
     
-    /*
-    for ( Pendulum *pendulum in self.pendulums ) {
-        pendulum.handleNode.position = SCNVector3Make( self.pendulumBobRadius + self.pendulumBobRadius * 2.0 * ( [self.pendulums indexOfObject:pendulum] - self.numberOfPendulums * 0.5 ) , 0.0, 0.0 );
+    // use concurrence to add child node may cause problem
+    [self.pendulums enumerateObjectsUsingBlock:^(Pendulum *pendulum, NSUInteger idx, BOOL *stop) {
         [self.handleNode addChildNode:pendulum.handleNode];
-    }
-     */
+    }];
 }
 
 - (void)buildFrame {

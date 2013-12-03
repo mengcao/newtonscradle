@@ -657,28 +657,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <sceneView loops="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgN-gF-x8R" customClass="NewtonsCradleView">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </sceneView>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HV3-zP-uS9">
-                        <rect key="frame" x="14" y="552" width="69" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wGQ-XK-SVf">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="pauseScene:" target="494" id="G4Q-Vm-RVu"/>
-                        </connections>
-                    </button>
                     <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fh-BX-ms6">
-                        <rect key="frame" x="466" y="534" width="334" height="66"/>
+                        <rect key="frame" x="0.0" y="550" width="800" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-xK-bHs">
-                                <rect key="frame" x="192" y="19" width="124" height="25"/>
+                                <rect key="frame" x="279" y="12" width="124" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="10" doubleValue="5" tickMarkPosition="below" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="nGl-MH-uaW"/>
                                 <connections>
@@ -686,7 +670,7 @@
                                 </connections>
                             </slider>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BL4-s1-EuT">
-                                <rect key="frame" x="18" y="29" width="170" height="17"/>
+                                <rect key="frame" x="105" y="18" width="170" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Number of Pendulums: 5" id="BD4-bS-zW5">
                                     <font key="font" metaFont="system"/>
@@ -694,16 +678,32 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HV3-zP-uS9">
+                                <rect key="frame" x="23" y="9" width="69" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wGQ-XK-SVf">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="pauseScene:" target="494" id="G4Q-Vm-RVu"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </customView>
+                    <sceneView ambiguous="YES" misplaced="YES" loops="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0GU-ug-Cgb" customClass="NewtonsCradleView">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="550"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </sceneView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="DgN-gF-x8R" secondAttribute="trailing" id="EKQ-X3-rag"/>
-                    <constraint firstItem="DgN-gF-x8R" firstAttribute="top" secondItem="372" secondAttribute="top" id="EoZ-3Y-7tO"/>
-                    <constraint firstItem="0fh-BX-ms6" firstAttribute="top" secondItem="372" secondAttribute="top" id="Fp2-ay-kiA"/>
-                    <constraint firstAttribute="trailing" secondItem="0fh-BX-ms6" secondAttribute="trailing" id="THf-ql-GMU"/>
-                    <constraint firstAttribute="bottom" secondItem="DgN-gF-x8R" secondAttribute="bottom" id="Z9Q-23-8qY"/>
-                    <constraint firstItem="DgN-gF-x8R" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="iTE-n6-Ehf"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="0Ec-qp-dPp"/>
+                    <constraint firstAttribute="bottom" secondItem="0GU-ug-Cgb" secondAttribute="bottom" id="Lcp-bf-req"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="0fh-BX-ms6" secondAttribute="bottom" id="MnI-dW-vEf"/>
+                    <constraint firstItem="0fh-BX-ms6" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="2" id="PG5-qi-Vlt"/>
+                    <constraint firstAttribute="trailing" secondItem="0GU-ug-Cgb" secondAttribute="trailing" id="jkt-aS-Uce"/>
+                    <constraint firstItem="0fh-BX-ms6" firstAttribute="top" secondItem="372" secondAttribute="top" id="wRW-07-Nkb"/>
                 </constraints>
             </view>
         </window>
@@ -711,7 +711,7 @@
             <connections>
                 <outlet property="numberOfPendulumsSlider" destination="Sjb-xK-bHs" id="Iob-p5-loF"/>
                 <outlet property="numberOfPendulumsTextField" destination="BL4-s1-EuT" id="MT1-TX-2vG"/>
-                <outlet property="sceneView" destination="DgN-gF-x8R" id="XCD-d5-AjV"/>
+                <outlet property="sceneView" destination="0GU-ug-Cgb" id="z9k-Ez-g6x"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>

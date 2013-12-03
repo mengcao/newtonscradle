@@ -11,9 +11,9 @@
 @interface AppDelegate()
 
 @property (assign) IBOutlet NSWindow *window;
-@property (weak) IBOutlet NewtonsCradleView *sceneView;
 @property (weak) IBOutlet NSSlider *numberOfPendulumsSlider;
 @property (weak) IBOutlet NSTextField *numberOfPendulumsTextField;
+@property (weak) IBOutlet NewtonsCradleView *sceneView;
 
 @end
 
