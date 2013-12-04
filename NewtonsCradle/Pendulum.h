@@ -11,13 +11,13 @@
 
 @interface Pendulum : NSObject
 
-@property ( nonatomic ) float angle;
-@property ( nonatomic ) float length;
-@property ( nonatomic ) NSString *name;
-@property ( nonatomic ) float bobRadius;
-@property ( nonatomic ) float stringTiltedAngle;
-@property ( nonatomic ) float angularVelocity;
-@property ( nonatomic ) SCNNode *handleNode;
+@property float angle;
+@property float length;
+@property NSString *name;
+@property float bobRadius;
+@property float stringTiltedAngle;
+@property float angularVelocity;
+@property SCNNode *handleNode;
 
 - (id) initWithAngle: (float)angle length: (float)lenght bobRadius: (float)bobRadius stringTiltedAngle: (float)stringTiltedAngle name: (NSString *)name;
 - (void) buildPendulum;

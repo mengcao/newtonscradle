@@ -152,6 +152,12 @@
     }
     
     [super mouseUp:theEvent];
+    CATransform3D invert = self.pointOfView.camera.projectionTransform;
+    
+    NSLog( @"%f, %f, %f, %f\n %f, %f, %f, %f\n %f, %f, %f, %f\n %f, %f, %f, %f\n", invert.m11, invert.m12, invert.m13, invert.m14,
+        invert.m21, invert.m22, invert.m23, invert.m24,
+        invert.m31, invert.m32, invert.m33, invert.m34,
+        invert.m41, invert.m42, invert.m43, invert.m44 );
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent {

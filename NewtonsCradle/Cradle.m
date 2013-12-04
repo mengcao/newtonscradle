@@ -10,15 +10,15 @@
 
 @interface Cradle()
 
-@property (nonatomic) NSUInteger maxNumberOfPendulums;
-@property (nonatomic) NSMutableArray *pendulumsPool;
-@property (nonatomic) SCNNode *frontHorizontalPoleNode;
-@property (nonatomic) SCNNode *backHorizontalPoleNode;
-@property (nonatomic) SCNNode *leftFrontVerticalPoleNode;
-@property (nonatomic) SCNNode *leftBackVerticalPoleNode;
-@property (nonatomic) SCNNode *rightFrontVerticalPoleNode;
-@property (nonatomic) SCNNode *rightBackVerticalPoleNode;
-@property (nonatomic) SCNNode *baseNode;
+@property NSUInteger maxNumberOfPendulums;
+@property NSMutableArray *pendulumsPool;
+@property SCNNode *frontHorizontalPoleNode;
+@property SCNNode *backHorizontalPoleNode;
+@property SCNNode *leftFrontVerticalPoleNode;
+@property SCNNode *leftBackVerticalPoleNode;
+@property SCNNode *rightFrontVerticalPoleNode;
+@property SCNNode *rightBackVerticalPoleNode;
+@property SCNNode *baseNode;
 
 
 @end
@@ -70,8 +70,7 @@
 
 - (void)buildCradle {
     _pendulums = [[NSMutableArray alloc] initWithCapacity:self.numberOfPendulums];
-    
-    
+        
     for ( int i = 0; i < self.numberOfPendulums; i++ ) {
         _pendulums[i] = self.pendulumsPool[i];
     }
@@ -162,26 +161,48 @@
 }
 
 - (void)dragPendulumBobAtIndex: (NSUInteger)index withAngle: (float)angle {
+    
+    SCNVector4 angleRotation = SCNVector4Make( 0.0, 0.0, 1.0, angle );
+    SCNVector4 zeroRotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
     if ( angle > 0 ) {
-        for ( Pendulum *pendulum in self.pendulums ) {
-            if ([self.pendulums indexOfObject:pendulum] >= index ) {
+//        for ( Pendulum *pendulum in self.pendulums ) {
+//            if ([self.pendulums indexOfObject:pendulum] >= index ) {
+//                pendulum.angle = angle;
+//                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, angle );
+//            } else {
+//                pendulum.angle = 0.0;
+//                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
+//            }
+//        }
+        
+        [self.pendulums enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(Pendulum *pendulum, NSUInteger idx, BOOL *stop) {
+            if ( idx >= index ) {
                 pendulum.angle = angle;
-                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, angle );
+                pendulum.handleNode.rotation = angleRotation;
             } else {
                 pendulum.angle = 0.0;
-                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
+                pendulum.handleNode.rotation = zeroRotation;
             }
-        }
+        }];
     } else {
-        for ( Pendulum *pendulum in self.pendulums ) {
-            if ([self.pendulums indexOfObject:pendulum] <= index ) {
+        [self.pendulums enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(Pendulum *pendulum, NSUInteger idx, BOOL *stop) {
+            if ( idx <= index ) {
                 pendulum.angle = angle;
-                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, angle );
+                pendulum.handleNode.rotation = angleRotation;
             } else {
                 pendulum.angle = 0.0;
-                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
+                pendulum.handleNode.rotation = zeroRotation;
             }
-        }
+        }];
+//        for ( Pendulum *pendulum in self.pendulums ) {
+//            if ([self.pendulums indexOfObject:pendulum] <= index ) {
+//                pendulum.angle = angle;
+//                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, angle );
+//            } else {
+//                pendulum.angle = 0.0;
+//                pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
+//            }
+//        }
     }
 }
 
@@ -217,23 +238,37 @@
 
 - (void)animateWithDuration: (float)duration {
     NSArray *animationValues = [self animationValuesInDuration:duration];
-    for ( Pendulum *pendulum in self.pendulums ) {
+//    for ( Pendulum *pendulum in self.pendulums ) {
+//        CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"rotation"];
+//        animation.duration = duration;
+//        animation.values = [animationValues objectAtIndex:[self.pendulums indexOfObject:pendulum]];
+//        animation.delegate = self;
+//        [pendulum.handleNode addAnimation:animation forKey:@"animation"];
+//        
+//    }
+    [self.pendulums enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(Pendulum *pendulum, NSUInteger idx, BOOL *stop) {
         CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"rotation"];
         animation.duration = duration;
-        animation.values = [animationValues objectAtIndex:[self.pendulums indexOfObject:pendulum]];
+        animation.values = [animationValues objectAtIndex:idx];
         animation.delegate = self;
         [pendulum.handleNode addAnimation:animation forKey:@"animation"];
-        
-    }
+    }];
 }
 
 - (void)stopAnimation {
-    for ( Pendulum *pendulum in self.pendulums ) {
+//    for ( Pendulum *pendulum in self.pendulums ) {
+//        pendulum.angle = 0.0;
+//        pendulum.angularVelocity = 0.0;
+//        pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
+//        [pendulum.handleNode removeAllAnimations];
+//    }
+    SCNVector4 zeroRotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
+    [self.pendulums enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(Pendulum *pendulum, NSUInteger idx, BOOL *stop) {
         pendulum.angle = 0.0;
         pendulum.angularVelocity = 0.0;
-        pendulum.handleNode.rotation = SCNVector4Make( 0.0, 0.0, 1.0, 0.0 );
+        pendulum.handleNode.rotation = zeroRotation;
         [pendulum.handleNode removeAllAnimations];
-    }
+    }];
 }
 
 - (NSInteger)findCollisionWithinInterval: (float)dt {
