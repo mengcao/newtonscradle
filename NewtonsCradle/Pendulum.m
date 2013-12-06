@@ -44,6 +44,7 @@
     SCNNode *bobNode = [SCNNode node];
     bobNode.geometry = bob;
     bobNode.position = SCNVector3Make( 0.0, -self.length, 0.0 );
+    bobNode.name = @"bob";
     
     [self.handleNode addChildNode:backStringNode];
     [self.handleNode addChildNode:frontStringNode];

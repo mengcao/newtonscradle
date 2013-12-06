@@ -10,16 +10,15 @@
 
 @interface Cradle()
 
-@property NSUInteger maxNumberOfPendulums;
-@property NSMutableArray *pendulumsPool;
-@property SCNNode *frontHorizontalPoleNode;
-@property SCNNode *backHorizontalPoleNode;
-@property SCNNode *leftFrontVerticalPoleNode;
-@property SCNNode *leftBackVerticalPoleNode;
-@property SCNNode *rightFrontVerticalPoleNode;
-@property SCNNode *rightBackVerticalPoleNode;
-@property SCNNode *baseNode;
-
+@property (nonatomic) NSUInteger maxNumberOfPendulums;
+@property (nonatomic) NSMutableArray *pendulumsPool;
+@property (nonatomic) SCNNode *frontHorizontalPoleNode;
+@property (nonatomic) SCNNode *backHorizontalPoleNode;
+@property (nonatomic) SCNNode *leftFrontVerticalPoleNode;
+@property (nonatomic) SCNNode *leftBackVerticalPoleNode;
+@property (nonatomic) SCNNode *rightFrontVerticalPoleNode;
+@property (nonatomic) SCNNode *rightBackVerticalPoleNode;
+@property (nonatomic) SCNNode *baseNode;
 
 @end
 
@@ -322,6 +321,16 @@
 - (void)cradleAnimationDidStart: (NSNotification *)notification {
     self.isAnimating = YES;
     
+}
+
+- (SCNNode *)getLookAtNode {
+    if ( [self.pendulums count] >=1 ) {
+        Pendulum *middlePendulum = [self.pendulums objectAtIndex:[self.pendulums count] / 2];
+        SCNNode *lookAtNode = [middlePendulum.handleNode childNodeWithName:@"bob" recursively:YES];
+        return lookAtNode;
+    } else {
+        return nil;
+    }
 }
 
 // delegate methods of animations

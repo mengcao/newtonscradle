@@ -17,6 +17,9 @@
 @property ( nonatomic ) float dragStartAngle;
 @property ( nonatomic ) NSUInteger draggedPendulumIndex;
 @property ( nonatomic ) CATransform3D oldCameraTransform;
+@property ( nonatomic ) SCNNode *ambientLightNode;
+@property ( nonatomic ) SCNNode *diffuseLightNode;
+@property ( nonatomic ) SCNNode *spotLightNode;
 
 
 @end
@@ -33,10 +36,10 @@
 }
 
 - (void)setupScene {
+    [self addCradleAtPosition:SCNVector3Make(0.0, 15.0, 0.0)];
     [self addCamera];
     [self addFloor];
     [self addLights];
-    [self addCradleAtPosition:SCNVector3Make(0.0, 15.0, 0.0)];
     
     self.allowsCameraControl = YES;
     self.jitteringEnabled = YES;
@@ -72,18 +75,33 @@
 }
 
 - (void)addLights {
-    SCNNode *diffuseLightNode = [SCNNode node];
-    diffuseLightNode.light = [SCNLight light];
-    diffuseLightNode.light.type = SCNLightTypeOmni;
-    diffuseLightNode.position = SCNVector3Make( 0.0, 40.0, 40.0 );
-    diffuseLightNode.light.color = [NSColor whiteColor];
-    [self.scene.rootNode addChildNode:diffuseLightNode];
+    _diffuseLightNode = [SCNNode node];
+    _diffuseLightNode.light = [SCNLight light];
+    _diffuseLightNode.light.type = SCNLightTypeOmni;
+    _diffuseLightNode.position = SCNVector3Make( 0.0, 40.0, 40.0 );
+    _diffuseLightNode.rotation = SCNVector4Make( 1.0, 0.0, 0.0, -M_PI_2);
+    _diffuseLightNode.light.color = [NSColor whiteColor];
+    [self.scene.rootNode addChildNode:_diffuseLightNode];
     
-    SCNNode *ambientLightNode = [SCNNode node];
-    ambientLightNode.light = [SCNLight light];
-    ambientLightNode.light.type = SCNLightTypeAmbient;
-    ambientLightNode.light.color = [NSColor colorWithDeviceWhite:0.1 alpha:1.0];
-    [self.scene.rootNode addChildNode:ambientLightNode];
+    _ambientLightNode = [SCNNode node];
+    _ambientLightNode.light = [SCNLight light];
+    _ambientLightNode.light.type = SCNLightTypeAmbient;
+    _ambientLightNode.light.color = [NSColor colorWithDeviceWhite:0.1 alpha:1.0];
+    [self.scene.rootNode addChildNode:_ambientLightNode];
+    
+    _spotLightNode = [SCNNode node];
+    _spotLightNode.light = [SCNLight light];
+    _spotLightNode.light.type = SCNLightTypeSpot;
+    _spotLightNode.position = SCNVector3Make( 0.0, 40.0, 4.0 );
+    _spotLightNode.rotation = SCNVector4Make( 1.0, 0.0, 0.0, -M_PI_2 );
+    _spotLightNode.light.color = [NSColor whiteColor];
+    _spotLightNode.light.castsShadow = YES;
+    _spotLightNode.light.shadowColor = [NSColor blackColor];
+    _spotLightNode.light.shadowRadius = 1.0;
+    SCNNode *lookAtNode = [self.cradle getLookAtNode];
+    SCNLookAtConstraint *lookAtFirstPendulumConstraint = [SCNLookAtConstraint lookAtConstraintWithTarget:lookAtNode];
+    [_spotLightNode setConstraints:[NSArray arrayWithObject:lookAtFirstPendulumConstraint]];
+    [self.scene.rootNode addChildNode:_spotLightNode];
 }
 
 - (void)addCradleAtPosition: (SCNVector3)position {
@@ -97,6 +115,9 @@
 
 - (void)updateCradleWithNumberOfPendulums:(NSUInteger)numberOfPendulums {
     [self.cradle updateWithNumberOfPendulums:numberOfPendulums];
+    SCNNode *lookAtNode = [self.cradle getLookAtNode];
+    SCNLookAtConstraint *lookAtFirstPendulumConstraint = [SCNLookAtConstraint lookAtConstraintWithTarget:lookAtNode];
+    [self.spotLightNode setConstraints:[NSArray arrayWithObject:lookAtFirstPendulumConstraint]];
 }
 
 - (void)stopCradle {
@@ -152,12 +173,12 @@
     }
     
     [super mouseUp:theEvent];
-    CATransform3D invert = self.pointOfView.camera.projectionTransform;
-    
-    NSLog( @"%f, %f, %f, %f\n %f, %f, %f, %f\n %f, %f, %f, %f\n %f, %f, %f, %f\n", invert.m11, invert.m12, invert.m13, invert.m14,
-        invert.m21, invert.m22, invert.m23, invert.m24,
-        invert.m31, invert.m32, invert.m33, invert.m34,
-        invert.m41, invert.m42, invert.m43, invert.m44 );
+//    CATransform3D invert = self.pointOfView.camera.projectionTransform;
+//    
+//    NSLog( @"%f, %f, %f, %f\n %f, %f, %f, %f\n %f, %f, %f, %f\n %f, %f, %f, %f\n", invert.m11, invert.m12, invert.m13, invert.m14,
+//        invert.m21, invert.m22, invert.m23, invert.m24,
+//        invert.m31, invert.m32, invert.m33, invert.m34,
+//        invert.m41, invert.m42, invert.m43, invert.m44 );
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent {
