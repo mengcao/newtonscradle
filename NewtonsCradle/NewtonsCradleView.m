@@ -98,10 +98,14 @@
     _spotLightNode.light.castsShadow = YES;
     _spotLightNode.light.shadowColor = [NSColor blackColor];
     _spotLightNode.light.shadowRadius = 1.0;
+    [self setSpotLightLookConstraint];
+    [self.scene.rootNode addChildNode:_spotLightNode];
+}
+
+- (void) setSpotLightLookConstraint {
     SCNNode *lookAtNode = [self.cradle getLookAtNode];
     SCNLookAtConstraint *lookAtFirstPendulumConstraint = [SCNLookAtConstraint lookAtConstraintWithTarget:lookAtNode];
-    [_spotLightNode setConstraints:[NSArray arrayWithObject:lookAtFirstPendulumConstraint]];
-    [self.scene.rootNode addChildNode:_spotLightNode];
+    [self.spotLightNode setConstraints:[NSArray arrayWithObject:lookAtFirstPendulumConstraint]];
 }
 
 - (void)addCradleAtPosition: (SCNVector3)position {
@@ -115,9 +119,7 @@
 
 - (void)updateCradleWithNumberOfPendulums:(NSUInteger)numberOfPendulums {
     [self.cradle updateWithNumberOfPendulums:numberOfPendulums];
-    SCNNode *lookAtNode = [self.cradle getLookAtNode];
-    SCNLookAtConstraint *lookAtFirstPendulumConstraint = [SCNLookAtConstraint lookAtConstraintWithTarget:lookAtNode];
-    [self.spotLightNode setConstraints:[NSArray arrayWithObject:lookAtFirstPendulumConstraint]];
+    [self setSpotLightLookConstraint];
 }
 
 - (void)stopCradle {
