@@ -141,8 +141,7 @@
                 self.draggedPendulumIndex = [self.cradle indexOfPendulumWithPendulumName:hit.node.parentNode.name];
             }
         }
-    }
-    
+    }    
     
     [super mouseDown:theEvent];
 }
