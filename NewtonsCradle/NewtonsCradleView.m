@@ -44,6 +44,7 @@
     self.allowsCameraControl = YES;
     self.jitteringEnabled = YES;
     self.backgroundColor = [NSColor clearColor];
+    self.showsStatistics = NO;
 }
 
 

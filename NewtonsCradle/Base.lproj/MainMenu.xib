@@ -667,7 +667,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-xK-bHs">
-                                <rect key="frame" x="279" y="12" width="124" height="25"/>
+                                <rect key="frame" x="272" y="12" width="124" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="10" doubleValue="5" tickMarkPosition="below" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="nGl-MH-uaW"/>
                                 <connections>
@@ -694,18 +694,29 @@
                                     <action selector="pauseScene:" target="494" id="G4Q-Vm-RVu"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vRM-gt-S71">
+                                <rect key="frame" x="414" y="9" width="70" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Stats" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kTK-UR-yWg">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="toggleStats:" target="494" id="vcV-k2-8BZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="0GU-ug-Cgb" secondAttribute="bottom" id="5Wy-rN-v58"/>
-                    <constraint firstItem="0fh-BX-ms6" firstAttribute="top" secondItem="372" secondAttribute="top" id="XfG-iC-OQm"/>
-                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="dYe-Ct-sBe"/>
-                    <constraint firstItem="0fh-BX-ms6" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="kVX-6O-sex"/>
-                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="0fh-BX-ms6" secondAttribute="bottom" id="l9J-gS-OYt"/>
-                    <constraint firstAttribute="trailing" secondItem="0fh-BX-ms6" secondAttribute="trailing" id="wqb-vv-QdC"/>
-                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="0fh-BX-ms6" secondAttribute="bottom" id="xdz-7Q-MgK"/>
-                    <constraint firstAttribute="trailing" secondItem="0GU-ug-Cgb" secondAttribute="trailing" id="zEe-WG-WpU"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="Eop-wv-ds3"/>
+                    <constraint firstItem="0fh-BX-ms6" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="GrI-sF-cea"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="0fh-BX-ms6" secondAttribute="bottom" id="P76-ak-0L3"/>
+                    <constraint firstAttribute="bottom" secondItem="0GU-ug-Cgb" secondAttribute="bottom" id="P8o-Cp-psM"/>
+                    <constraint firstItem="0fh-BX-ms6" firstAttribute="top" secondItem="372" secondAttribute="top" id="PA0-sQ-v39"/>
+                    <constraint firstAttribute="trailing" secondItem="0GU-ug-Cgb" secondAttribute="trailing" id="YME-wQ-nMQ"/>
+                    <constraint firstAttribute="trailing" secondItem="0fh-BX-ms6" secondAttribute="trailing" id="j80-X0-gEa"/>
+                    <constraint firstItem="0GU-ug-Cgb" firstAttribute="top" secondItem="0fh-BX-ms6" secondAttribute="bottom" id="pQk-zR-RFX"/>
                 </constraints>
             </view>
         </window>

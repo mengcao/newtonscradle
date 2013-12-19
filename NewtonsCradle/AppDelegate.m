@@ -31,8 +31,16 @@
 - (void)awakeFromNib {
     self.sceneView.scene = [SCNScene scene];
     [self.sceneView setupScene];
+    
 }
 
+- (IBAction)toggleStats:(NSButton *)sender {
+    if ( self.sceneView.showsStatistics ) {
+        self.sceneView.showsStatistics = NO;
+    } else {
+        self.sceneView.showsStatistics = YES;
+    }
+}
 
 - (IBAction)pauseScene:(NSButton *)sender {
     [self.sceneView stopCradle];
